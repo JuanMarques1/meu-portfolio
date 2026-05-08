@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juan Oliveira Marques · Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+    integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+    integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="js/i18n.jsx"></script>
+  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="js/components.jsx"></script>
+  <script type="text/babel" src="js/console.jsx"></script>
+
+  <script type="text/babel" data-presets="env,react">
+    const { useState, useEffect } = React;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "dark": true,
+      "lang": "pt"
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [tw, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      const [consoleOpen, setConsoleOpen] = useState(false);
+
+      // aplica o tema ao <html>
+      useEffect(() => {
+        document.documentElement.dataset.theme = tw.dark ? "dark" : "light";
+      }, [tw.dark]);
+
+      // easter egg: digitar "sudo" em qualquer lugar
+      useEffect(() => {
+        let buf = "";
+        const onKey = (e) => {
+          if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) return;
+          if (e.key.length !== 1) return;
+          buf = (buf + e.key.toLowerCase()).slice(-6);
+          if (buf.endsWith("sudo")) {
+            setConsoleOpen(true);
+            buf = "";
+          }
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+      }, []);
+
+      const lang = tw.lang || "pt";
+      const t = window.CONTENT[lang];
+
+      return (
+        <>
+          <Navbar
+            t={t}
+            lang={lang}
+            setLang={(l) => setTweak("lang", l)}
+            dark={tw.dark}
+            setDark={(d) => setTweak("dark", d)}
+            onConsole={() => setConsoleOpen(true)}
+          />
+          <Hero t={t} />
+          <About t={t} />
+          <Skills t={t} />
+          <Projects t={t} />
+          <Timeline t={t} />
+          <Contact t={t} />
+          <Footer t={t} />
+
+          <Console open={consoleOpen} onClose={() => setConsoleOpen(false)} />
+
+          <TweaksPanel title="Tweaks">
+            <TweakSection label="Theme" />
+            <TweakToggle label="Dark mode" value={tw.dark}
+              onChange={(v) => setTweak("dark", v)} />
+            <TweakSection label="Language" />
+            <TweakRadio label="Idioma" value={lang}
+              options={[{ value: "pt", label: "PT" }, { value: "en", label: "EN" }]}
+              onChange={(v) => setTweak("lang", v)} />
+          </TweaksPanel>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+
+</html>
