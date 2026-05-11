@@ -126,7 +126,7 @@ function HeroTerminal() {
         <span className="term-line">{`{`}</span>
         <span className="term-line">  <span className="term-key">"role"</span>: <span className="term-string">"backend developer"</span>,</span>
         <span className="term-line">  <span className="term-key">"focus"</span>: [<span className="term-string">"systems"</span>, <span className="term-string">"AI"</span>],</span>
-        <span className="term-line">  <span className="term-key">"stack"</span>: [<span className="term-string">"python"</span>, <span className="term-string">"django"</span>, <span className="term-string">"react"</span>],</span>
+        <span className="term-line">  <span className="term-key">"stack"</span>: [<span className="term-string">"python"</span>, <span className="term-string">"react"</span>],</span>
         <span className="term-line">  <span className="term-key">"learning"</span>: <span className="term-num">true</span>,</span>
         <span className="term-line">  <span className="term-key">"available"</span>: <span className="term-num">true</span></span>
         <span className="term-line">{`}`}</span>

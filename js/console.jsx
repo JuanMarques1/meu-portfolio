@@ -24,7 +24,7 @@ const COMMANDS = {
   ],
   skills: () => [
     "stack:",
-    "  backend     python · django · fastapi · c# · .net · java",
+    "  backend     python · fastapi · c# · .net",
     "  frontend    react · javascript · html · css · bootstrap",
     "  tooling     git · github · vs code",
     "  basics      apis rest · sql · lógica · c",
