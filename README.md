@@ -1,4 +1,4 @@
-# Portfólio · Juan Oliveira Marques
+# Portfólio ·
 
 Portfólio pessoal com estética terminal-tech, construído com React (via CDN) e CSS puro — sem build step, sem dependências locais.
 
@@ -55,5 +55,4 @@ Abra `index.html` diretamente no navegador — não requer servidor ou instalaç
 ## Contato
 
 - Email: juanoliveira549@gmail.com
-- GitHub: [github.com/JuanMarques1](https://github.com/JuanMarques1)
 - LinkedIn: [linkedin.com/in/juan-oliveira-marques](https://www.linkedin.com/in/juan-oliveira-marques/)
